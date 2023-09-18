@@ -81,21 +81,6 @@ const item = {
   },
 };
 
-const itemText = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 2,
-      delay: 2,
-    },
-  },
-};
-
 const CoverVideo = () => {
   return (
     <VideoContainer>
@@ -132,9 +117,7 @@ const CoverVideo = () => {
           </motion.h1>
         </div>
         <motion.h2
-          variants={itemText}
-          initial="hidden"
-          animate="show"
+          variants={item}
           data-scroll
           data-scroll-delay="0.04"
           data-scroll-speed="2">
