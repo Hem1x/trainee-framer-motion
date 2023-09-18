@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import CoverVideo from '../components/CoverVideo';
 import Logo from '../components/Logo';
-import NavBar from '../components/NavBar';
+import { motion } from 'framer-motion';
 
-const Section = styled.section`
+const Section = styled(motion.section)`
   position: relative;
   min-height: 100vh;
   overflow: hidden;
@@ -11,10 +11,12 @@ const Section = styled.section`
 
 const Home = () => {
   return (
-    <Section>
-      <CoverVideo />
+    <Section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}>
       <Logo />
-      <NavBar />
+      <CoverVideo />
     </Section>
   );
 };

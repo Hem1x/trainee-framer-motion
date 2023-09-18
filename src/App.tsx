@@ -1,11 +1,19 @@
-import GlobalStyles from './styles/GlobalStyles';
-import { ThemeProvider } from 'styled-components';
-import { dark } from './styles/Themes';
-import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
-import { useRef } from 'react';
-import Home from './sections/Home';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
-import { AnimatePresence } from 'framer-motion';
+
+import { useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from 'styled-components';
+import { LocomotiveScrollProvider } from 'react-locomotive-scroll';
+
+import GlobalStyles from './styles/GlobalStyles';
+import { dark } from './styles/Themes';
+import Home from './sections/Home';
+import About from './sections/About';
+import { Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Shop from './sections/Shop';
+import Arrival from './sections/Arrival';
+import MainLayout from './MainLayout';
 
 const App = () => {
   const containerRef = useRef(null);
@@ -13,7 +21,6 @@ const App = () => {
   return (
     <>
       <GlobalStyles />
-
       <ThemeProvider theme={dark}>
         <LocomotiveScrollProvider
           options={{
@@ -28,11 +35,33 @@ const App = () => {
             ]
           }
           containerRef={containerRef}>
-          <AnimatePresence>
-            <main className="App" ref={containerRef}>
-              <Home />
-            </main>
-          </AnimatePresence>
+          <main
+            data-scroll-container
+            className="App"
+            ref={containerRef}>
+            <AnimatePresence>
+              <NavBar />
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                exit={{
+                  opacity: 0,
+                }}>
+                <Routes>
+                  <Route path="/" element={<MainLayout />}>
+                    <Route path="home" element={<Home />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="shop" element={<Shop />} />
+                    <Route path="arrival" element={<Arrival />} />
+                  </Route>
+                </Routes>
+              </motion.div>
+            </AnimatePresence>
+          </main>
         </LocomotiveScrollProvider>
       </ThemeProvider>
     </>

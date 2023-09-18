@@ -83,7 +83,7 @@ const item = {
 
 const CoverVideo = () => {
   return (
-    <VideoContainer>
+    <VideoContainer data-scroll>
       <DarkOverlay />
       <Title variants={container} initial="hidden" animate="show">
         <div>
